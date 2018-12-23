@@ -1,0 +1,23 @@
+{
+    "name": "pressmodo/carbon-fields-custom-options-container",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "wordpress",
+        "wordpress-plugin"
+    ],
+    "support": {
+        "issues": "https://github.com/Pressmodo/carbon-fields-custom-options-container/issues",
+        "source": "https://github.com/Pressmodo/carbon-fields-custom-options-container"
+    },
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=5.3",
+        "composer/installers": "^1.0"
+    },
+    "autoload": {
+        "files": [
+            "carbon-fields-custom-options-container.php"
+        ]
+    }
+}
