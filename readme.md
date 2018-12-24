@@ -18,15 +18,17 @@ This custom container for [Carbon Fields](https://carbonfields.net/) provides th
 ```
 Container::make( 'custom_options', 'Theme Options' )
 	->set_page_file( 'my-options' )
-    ->add_fields( array(
-        Field::make( 'text', 'crb_facebook_url') ,
-        Field::make( 'textarea', 'crb_footer_text' )
-    ) );
+	->add_fields(
+		array(
+			Field::make( 'text', 'crb_facebook_url' ),
+			Field::make( 'textarea', 'crb_footer_text' ),
+		)
+	);
 ```
 
 ## Usage
 
-In order to setup a custom file to render options pages you'll need to use the filter: `"cb_theme_options_{$page_file}_container_file"` where `{$page_file}` is the string set with the `set_page_file` method mentioned above (`"cb_theme_options_my-options_container_file"`). 
+In order to setup a custom file to render options pages you'll need to use the filter: `"cb_theme_options_{$page_file}_container_file"` where `{$page_file}` is the string set with the `set_page_file` method mentioned above (`"cb_theme_options_my-options_container_file"`).
 
 Through the filter, you need to return the custom file that'll be loaded to render pages. [You can use Carbon Field's existing file as a starting point](https://github.com/htmlburger/carbon-fields/blob/master/templates/Container/common/options-page.php).
 
