@@ -1,4 +1,9 @@
 <?php
+/**
+ * Carbon fields theme options container modified to support custom files for rendering pages.
+ *
+ * @package carbon-fields-custom-options-container
+ */
 
 namespace Carbon_Fields\Container;
 
@@ -11,14 +16,14 @@ use Carbon_Fields\Exception\Incorrect_Syntax_Exception;
 class Custom_Options_Container extends Container {
 
 	/**
-	 * Array of registered page slugs to verify uniqueness with
+	 * Array of registered page slugs to verify uniqueness with.
 	 *
 	 * @var array
 	 */
 	protected static $registered_pages = array();
 
 	/**
-	 * Array of container settings
+	 * Array of container settings.
 	 *
 	 * @var array
 	 */
@@ -48,7 +53,7 @@ class Custom_Options_Container extends Container {
 	}
 
 	/**
-	 * Sanitize a title to a filename
+	 * Sanitize a title to a filename.
 	 *
 	 * @param  string $title
 	 * @param  string $extension
@@ -85,7 +90,7 @@ class Custom_Options_Container extends Container {
 	}
 
 	/**
-	 * Checks whether the current save request is valid
+	 * Checks whether the current save request is valid.
 	 *
 	 * @return bool
 	 */
@@ -118,7 +123,7 @@ class Custom_Options_Container extends Container {
 	}
 
 	/**
-	 * Get environment array for page request (in admin)
+	 * Get environment array for page request (in admin).
 	 *
 	 * @return array
 	 */
@@ -127,16 +132,16 @@ class Custom_Options_Container extends Container {
 	}
 
 	/**
-	 * Perform checks whether the container should be attached during the current request
+	 * Perform checks whether the container should be attached during the current request.
 	 *
-	 * @return bool True if the container is allowed to be attached
+	 * @return bool True if the container is allowed to be attached.
 	 */
 	public function is_valid_attach_for_request() {
-		return $this->static_conditions_pass();
+		 return $this->static_conditions_pass();
 	}
 
 	/**
-	 * Get environment array for object id
+	 * Get environment array for object id.
 	 *
 	 * @return array
 	 */
@@ -145,7 +150,7 @@ class Custom_Options_Container extends Container {
 	}
 
 	/**
-	 * Check container attachment rules against object id
+	 * Check container attachment rules against object id.
 	 *
 	 * @param int $object_id
 	 * @return bool
@@ -193,7 +198,7 @@ class Custom_Options_Container extends Container {
 	 * @return boolean
 	 */
 	public function should_activate() {
-		$input        = stripslashes_deep( $_GET );
+		 $input       = stripslashes_deep( $_GET );
 		$request_page = isset( $input['page'] ) ? $input['page'] : '';
 		if ( ! empty( $request_page ) && $request_page === $this->get_page_file() ) {
 			return true;
@@ -203,7 +208,7 @@ class Custom_Options_Container extends Container {
 	}
 
 	/**
-	 * Output the container markup
+	 * Output the container markup.
 	 */
 	public function render() {
 		$input                    = stripslashes_deep( $_GET );
@@ -212,7 +217,7 @@ class Custom_Options_Container extends Container {
 			$this->notifications[] = __( 'Settings saved.', 'carbon-fields' );
 		}
 
-		include apply_filters( "cb_theme_options_{$this->id}_container_file", \Carbon_Fields\DIR . '/templates/Container/' . $this->type . '.php' );
+		include apply_filters( "cb_theme_options_{$this->get_page_file()}_container_file", \Carbon_Fields\DIR . '/templates/Container/' . $this->type . '.php' );
 	}
 
 	/**
@@ -225,7 +230,7 @@ class Custom_Options_Container extends Container {
 		$parent = $this->settings['parent'];
 
 		if ( ! $parent ) {
-			// Register top level page
+			// Register top level page.
 			if ( isset( static::$registered_pages[ $file ] ) ) {
 				Incorrect_Syntax_Exception::raise( 'Page "' . $file . '" already registered' );
 				return false;
@@ -235,7 +240,7 @@ class Custom_Options_Container extends Container {
 			return true;
 		}
 
-		// Register sub-page
+		// Register sub-page.
 		if ( ! isset( static::$registered_pages[ $parent ] ) ) {
 			static::$registered_pages[ $parent ] = array();
 		}
@@ -250,7 +255,7 @@ class Custom_Options_Container extends Container {
 	}
 
 	/**
-	 * Change the parent theme options page of this container
+	 * Change the parent theme options page of this container.
 	 *
 	 * @param  string|Theme_Options_Container $parent
 	 * @return Container                      $this
@@ -300,7 +305,7 @@ class Custom_Options_Container extends Container {
 	}
 
 	/**
-	 * Alias of the set_page_menu_position() method for backwards compatibility
+	 * Alias of the set_page_menu_position() method for backwards compatibility.
 	 *
 	 * @param  integer $position
 	 * @return Container $this
