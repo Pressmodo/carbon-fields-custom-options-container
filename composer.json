@@ -1,5 +1,6 @@
 {
     "name": "pressmodo/carbon-fields-custom-options-container",
+    "description": "A Carbon fields custom options container modified to support custom files for rendering pages.",
     "type": "library",
     "license": "MIT",
     "version": "0.1.0",
